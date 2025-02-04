@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise Video</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        video {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <video id="prankVideo" loop>
+        <source src="video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const video = document.getElementById("prankVideo");
+            
+            // Play video with sound on user interaction
+            const startVideo = () => {
+                video.play().catch(error => console.error("Autoplay blocked:", error));
+                document.removeEventListener("click", startVideo); // Remove listener after first click
+            };
+
+            // Force user interaction to allow autoplay with sound
+            document.addEventListener("click", startVideo);
+        });
+    </script>
+</body>
+</html>
